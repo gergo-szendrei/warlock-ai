@@ -1,0 +1,21 @@
+# AI
+langchain==0.3.19
+langchain-core==0.3.40
+langchain-ollama==0.2.3
+langchain-community==0.3.18
+langchain-experimental==0.3.4
+
+# API
+uvicorn~=0.34.0
+fastapi~=0.115.8
+pydantic~=2.10.6
+python-dotenv~=1.0.1
+
+# Coding Agent
+numpy==1.26.4
+
+# Stack Agent
+stackapi~=0.3.1
+
+# Search Agent
+duckduckgo-search~=7.5.1
