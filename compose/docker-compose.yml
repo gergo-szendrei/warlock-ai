@@ -1,0 +1,37 @@
+version: "3.8"
+name: "warlock-compose"
+services:
+  warlock-ai-service:
+    build: "../."
+    container_name: "warlock-ai-container"
+    restart: "unless-stopped"
+    ports:
+      - "8123:8123"
+    env_file:
+      - "../.env"
+      - "./app/.env"
+    networks:
+      - "warlock-network"
+    depends_on:
+      - "warlock-llm-service"
+  warlock-llm-service:
+    image: "ollama/ollama:latest"
+    container_name: "warlock-llm-container"
+    restart: "unless-stopped"
+    ports:
+      - "11434:11434"
+    env_file:
+      - "./ollama/.env"
+    networks:
+      - "warlock-network"
+    volumes:
+      - "ollama-volume:/root/.ollama"
+      - "./ollama/entrypoint.sh:/entrypoint.sh"
+    entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
+
+volumes:
+  ollama-volume:
+
+networks:
+  warlock-network:
+    external: false

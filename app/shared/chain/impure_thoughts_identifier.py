@@ -38,6 +38,7 @@ class Classification(BaseModel):
 
 model = (ChatOllama(
     model=os.environ["LLM_MODEL"],
+    base_url=os.environ["LLM_BASE_URL"],
     temperature=float(os.environ["LLM_TEMPERATURE"]))
          .with_structured_output(Classification))
 

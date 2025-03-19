@@ -7,6 +7,7 @@ from langchain_ollama import ChatOllama
 
 model = ChatOllama(
     model=os.environ["LLM_MODEL"],
+    base_url=os.environ["LLM_BASE_URL"],
     temperature=float(os.environ["LLM_TEMPERATURE"])
 )
 

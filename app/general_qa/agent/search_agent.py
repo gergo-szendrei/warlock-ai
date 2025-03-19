@@ -19,6 +19,7 @@ async def invoke_search_agent(
         iterator: AsyncCallbackHandler) -> None:
     model = ChatOllama(
         model=os.environ["LLM_MODEL"],
+        base_url=os.environ["LLM_BASE_URL"],
         temperature=float(os.environ["LLM_TEMPERATURE"]),
         callbacks=[iterator],
         disable_streaming=False
