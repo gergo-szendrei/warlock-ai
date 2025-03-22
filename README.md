@@ -1,5 +1,10 @@
 ## Install
-1. docker compose -f compose/docker-compose.yml up -d
+
+### For Full Stack development
+- docker compose -f compose/docker-compose-fs.yml up -d
+
+### For Data Science development
+- docker compose -f compose/docker-compose-ds.yml up -d
 
 ## Features
 1. General QA

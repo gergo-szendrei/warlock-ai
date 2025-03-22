@@ -1,11 +1,11 @@
-name: "warlock-compose"
+name: "warlock-compose-fs"
 services:
   warlock-ai-service:
     build: "../."
     container_name: "warlock-ai-container"
     restart: "unless-stopped"
     ports:
-      - "8123:8123"
+      - "8125:8123"
     env_file:
       - "../.env"
       - "./app/.env"
@@ -13,12 +13,13 @@ services:
       - "warlock-network"
     depends_on:
       - "warlock-llm-service"
+      - "warlock-db-service"
   warlock-llm-service:
     image: "ollama/ollama:latest"
     container_name: "warlock-llm-container"
     restart: "unless-stopped"
     ports:
-      - "11123:11434"
+      - "11125:11434"
     env_file:
       - "./llm/.env"
     networks:
@@ -27,9 +28,23 @@ services:
       - "warlock-llm-volume:/root/.ollama"
       - "./llm/entrypoint.sh:/entrypoint.sh"
     entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
+  warlock-db-service:
+    image: "pgvector/pgvector:pg16"
+    container_name: "warlock-db-container"
+    restart: "unless-stopped"
+    ports:
+      - "5125:5432"
+    env_file:
+      - "./db/.env"
+    networks:
+      - "warlock-network"
+    volumes:
+      - "warlock-db-volume:/data/postgres"
+      - "./db/init.sql:/docker-entrypoint-initdb.d/init.sql"
 
 volumes:
   warlock-llm-volume:
+  warlock-db-volume:
 
 networks:
   warlock-network:
