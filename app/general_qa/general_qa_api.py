@@ -52,6 +52,7 @@ async def general_qa(general_qa_request: GeneralQARequest) -> StreamingResponse 
     # Identify query category via Internal Service
     query_category: GeneralQAQueryCategory = get_query_category(query=general_qa_request.query)
 
+    logging.debug(f"Finished general_qa, starting stream")
     # Respond via Internal Service
     return handle_success(
         query=general_qa_request.query,

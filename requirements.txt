@@ -1,21 +1,24 @@
-# AI
+# AI - Chat
 langchain==0.3.19
 langchain-core==0.3.40
 langchain-ollama==0.2.3
 langchain-community==0.3.18
 langchain-experimental==0.3.4
 
+# AI - Agent
+numpy~=1.26.4
+stackapi~=0.3.1
+duckduckgo-search~=7.5.1
+
+# AI - Document
+langchain_postgres==0.0.13
+langchain-text-splitters==0.3.6
+pypdf~=5.4.0
+beautifulsoup4~=4.13.3
+
 # API
 uvicorn~=0.34.0
 fastapi~=0.115.8
 pydantic~=2.10.6
 python-dotenv~=1.0.1
-
-# Coding Agent
-numpy==1.26.4
-
-# Stack Agent
-stackapi~=0.3.1
-
-# Search Agent
-duckduckgo-search~=7.5.1
+httpx~=0.28.1
