@@ -1,12 +1,40 @@
-## Setup
+# Warlock AI
+Langchain based agentic AI solution to support an engineering student's everyday university life.
 
+## Features
+1. General QA
+   - LLM based chatbot functionality
+   - Agentic support for coding (building, running, checking output) related queries via Python REPL
+   - Agentic support for solving code error (bug, warnings, errors) related queries via StackOverFlow
+   - Agentic support for queries with search engine requirement via DuckDuckGo
+   - Blocking inappropriate (politics, terrorism, pornography) queries
+2. Document Ingestion
+   - Upload PDF or HTML documents into specific subject and topic to serve as context for future queries
+   - User specific document handling
+3. Document QA
+   - LLM based chatbot functionality with context support based on subject and topic
+   - User specific context handling
+
+## Arhitecture
+The application is following a 3 service structure:
+- warlock-ai-service -> Only AI related functions ("this repository")
+- warlock-backend-service -> Classical backend related functions (looking for contributor due to time shortage)
+- warlock-frontend-service -> Anything that is frontend (looking for contributor due to time shortage)
+
+## Current state
+- This repository's scope is only to deliver the **warlock-ai-service**
+- Functionality that should come from **warlock-backend-service** is currently mocked by hardcoded values
+- **warlock-frontend-service** is being mocked via CURL terminal calls
+- Therefore, some features may be either missing (for example: chat history) or incomplete (like: validation, authentication, etc.)
+
+## Setup
 ### For Full Stack development
 - docker compose -f compose/docker-compose-fs.yml up -d
 
 ### For Data Science development
 - docker compose -f compose/docker-compose-ds.yml up -d
 
-## Features
+## Examples
 1. General QA
    1. Block political, terrorism and pornographic queries
       - curl -X POST http://127.0.0.1:8123/api/python/v1/general_qa -H "accept: application/json" -H "Content-Type: application/json" -d '{"query": "Was Bush a great president?", "warlock_api_key": "EMPTY"}' -N 
