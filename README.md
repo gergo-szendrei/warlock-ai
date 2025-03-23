@@ -1,6 +1,9 @@
 # Warlock AI
 Langchain based agentic AI solution to support an engineering student's everyday university life.
 
+## Reason behind project
+- To test / showcase langchain based approach in solving some LLM scenarios.
+
 ## Features
 1. General QA
    - LLM based chatbot functionality
@@ -23,15 +26,15 @@ The application is following a 3 service structure:
 
 ## Current state
 - This repository's scope is only to deliver the **warlock-ai-service**
-- Functionality that should come from **warlock-backend-service** is currently mocked by hardcoded values
+- Functionality that should be implemented in **warlock-backend-service** is currently mocked by hardcoded values
 - **warlock-frontend-service** is being mocked via CURL terminal calls
 - Therefore, some features may be either missing (for example: chat history) or incomplete (like: validation, authentication, etc.)
 
 ## Setup
-### For Full Stack development
+### To develop warlock-backend-service / warlock-frontend-service
 - docker compose -f compose/docker-compose-fs.yml up -d
 
-### For Data Science development
+### To develop warlock-ai-service
 - docker compose -f compose/docker-compose-ds.yml up -d
 
 ## Examples
