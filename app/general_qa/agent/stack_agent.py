@@ -1,3 +1,4 @@
+import logging
 import os
 from typing import List
 
@@ -9,7 +10,7 @@ from langchain_community.agent_toolkits.load_tools import load_tools
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_ollama import ChatOllama
 
-from app.shared.prompt.tool_forced_no_thought_react_agent_prompt import tool_forced_no_thought_react_agent_prompt
+from app.general_qa.prompt.tool_forced_no_thought_react_agent_prompt import tool_forced_no_thought_react_agent_prompt
 from app.shared.util.async_callback_handler import AsyncCallbackHandler
 
 
@@ -17,6 +18,8 @@ async def invoke_stack_agent(
         query: str,
         chat_history: List[HumanMessage | AIMessage],
         iterator: AsyncCallbackHandler) -> None:
+    logging.debug(f"Calling invoke_stack_agent with query: {query}, chat_history: {chat_history} and iterator")
+
     model = ChatOllama(
         model=os.environ["LLM_MODEL"],
         base_url=os.environ["LLM_BASE_URL"],
@@ -54,6 +57,7 @@ async def invoke_stack_agent(
         verbose=os.environ["AGENT_COMMON_VERBOSE_LOGGING"] == "True"
     )
 
+    logging.debug(f"Finished invoke_stack_agent, starting stream")
     await agent_executor.ainvoke(
         input={
             "input": query,

@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 from app.shared.openapi.enum.user_role import UserRole
 
 
-class GeneralQAPreprocessResponse(BaseModel):
+class QAPreprocessResponse(BaseModel):
     user_id: str = Field(
         description="""
         Describes the id of a user

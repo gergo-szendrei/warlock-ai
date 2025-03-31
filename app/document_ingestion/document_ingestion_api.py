@@ -17,7 +17,7 @@ async def document_ingestion(document_ingestion_request: DocumentIngestionReques
     logging.debug(f"Calling document_ingestion with document_ingestion_request: {document_ingestion_request}")
 
     # Ingest document via Internal Service
-    asyncio.create_task(ingest_document_task(document_ingestion_request))
+    asyncio.create_task(ingest_document_task(document_ingestion_request=document_ingestion_request))
 
     logging.debug(f"Finished document_ingestion")
     return

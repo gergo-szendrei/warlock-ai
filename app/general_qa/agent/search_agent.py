@@ -1,3 +1,4 @@
+import logging
 import os
 from typing import List
 
@@ -17,6 +18,8 @@ async def invoke_search_agent(
         query: str,
         chat_history: List[HumanMessage | AIMessage],
         iterator: AsyncCallbackHandler) -> None:
+    logging.debug(f"Calling invoke_search_agent with query: {query}, chat_history: {chat_history} and iterator")
+
     model = ChatOllama(
         model=os.environ["LLM_MODEL"],
         base_url=os.environ["LLM_BASE_URL"],
@@ -54,6 +57,7 @@ async def invoke_search_agent(
         verbose=os.environ["AGENT_COMMON_VERBOSE_LOGGING"] == "True"
     )
 
+    logging.debug(f"Finished invoke_search_agent, starting stream")
     await agent_executor.ainvoke(
         input={
             "input": query,

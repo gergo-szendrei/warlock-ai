@@ -62,14 +62,15 @@ class AsyncCallbackHandler(AsyncIteratorCallbackHandler):
 
             Timer(
                 interval=float(os.environ["AGENT_COMMON_FINAL_ANSWER_GRACE_PERIOD_SECONDS"]),
-                function=self.stream_response_if_truly_final,
+                function=self._stream_response_if_truly_final,
                 args=[counter_on_trigger]
             ).start()
 
-    def stream_response_if_truly_final(
+    def _stream_response_if_truly_final(
             self,
             counter_on_trigger: int
     ) -> None:
+        # TODO - Send answer to backend
         if counter_on_trigger == self.counter:
             for token in self.result.get(self.counter):
                 self.queue.put_nowait(token)
