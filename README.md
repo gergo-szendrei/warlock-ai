@@ -2,7 +2,7 @@
 Langchain based agentic AI solution to support an engineering student's everyday university life.
 
 ## Reason behind project
-- To test / showcase langchain based approach in solving some LLM scenarios.
+- To test / showcase Langchain / Python based approach in solving some LLM scenarios.
 
 ## Features
 1. General QA
