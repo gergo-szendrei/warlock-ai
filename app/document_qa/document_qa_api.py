@@ -44,9 +44,9 @@ async def document_qa(document_qa_request: DocumentQARequest) -> StreamingRespon
     # Get context from vector store via Internal Service
     context = get_context(
         query=document_qa_request.query,
+        user_id=qa_preprocess_response.user_id,
         subject_id=document_qa_request.subject_id,
-        topic_id=document_qa_request.topic_id,
-        user_id=qa_preprocess_response.user_id
+        topic_id=document_qa_request.topic_id
     )
 
     logging.debug(f"Finished document_qa, starting stream")

@@ -24,7 +24,7 @@ def get_query_category(query: str) -> GeneralQAQueryCategory:
     logging.debug(f"Calling get_query_category with query: {query}")
     result: BaseMessage = identify_query_category(query=query)
 
-    logging.debug(f"Finished get_query_category with result: {result}")
+    logging.debug(f"Finished get_query_category with result: {result.content}")
     return GeneralQAQueryCategory(result.content)
 
 
@@ -59,7 +59,10 @@ async def _create_success_generator(
         query_category: GeneralQAQueryCategory,
         iterator: AsyncCallbackHandler
 ) -> AsyncGenerator[str, Any]:
-    logging.debug(f"Calling _create_success_generator with query: {query}, chat_history: {chat_history} and iterator")
+    logging.debug(f""" 
+        Calling _create_success_generator with query: {query}, 
+        chat_history: {chat_history}, query_category: {query_category} and iterator
+    """)
 
     invoke_agent = agent_map.get(query_category)
     task: Task = asyncio.create_task(
