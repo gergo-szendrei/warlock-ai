@@ -48,5 +48,6 @@ async def general_qa(general_qa_request: GeneralQARequest) -> StreamingResponse 
     return handle_success(
         query=general_qa_request.query,
         chat_history=shared_qa_result,
+        user_id=qa_preprocess_response.user_id,
         query_category=query_category
     )

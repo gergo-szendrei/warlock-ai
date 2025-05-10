@@ -33,3 +33,20 @@ def get_conversation_history(user_id: str) -> List[HistoryMessage]:
 
     logging.debug(f"Finished get_conversation_history with history_messages: {history_messages}")
     return history_messages
+
+
+def save_new_message_to_history(
+        user_id: str,
+        subject_id: int,
+        topic_id: int,
+        message_content: str
+) -> None:
+    logging.debug(f"""
+        Calling save_new_message_to_history with user_id: {user_id}, subject_id: {subject_id},
+        topic_id: {topic_id} and message_content: {message_content}
+    """)
+
+    # TODO - Implement SYNC API call with External
+    # TODO - Handle error path
+
+    logging.debug(f"Finished save_new_message_to_history")

@@ -54,5 +54,8 @@ async def document_qa(document_qa_request: DocumentQARequest) -> StreamingRespon
     return handle_success(
         query=document_qa_request.query,
         context=context,
+        user_id=qa_preprocess_response.user_id,
+        subject_id=document_qa_request.subject_id,
+        topic_id=document_qa_request.topic_id,
         chat_history=shared_qa_result
     )

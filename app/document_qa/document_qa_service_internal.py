@@ -36,10 +36,20 @@ def get_context(
 def handle_success(
         query: str,
         context: str,
+        user_id: str,
+        subject_id: int,
+        topic_id: int,
         chat_history: List[HumanMessage | AIMessage]
 ) -> StreamingResponse:
-    logging.debug(f"Calling handle_success with query: {query}, context: {context} and chat_history: {chat_history}")
-    iterator: AsyncCallbackHandler = AsyncCallbackHandler()
+    logging.debug(f""" 
+        Calling handle_success with query: {query}, context: {context}, user_id: {user_id},
+        subject_id: {subject_id}, topic_id: {topic_id} and chat_history: {chat_history}
+    """)
+    iterator: AsyncCallbackHandler = AsyncCallbackHandler(
+        user_id=user_id,
+        subject_id=subject_id,
+        topic_id=topic_id
+    )
     success_generator: AsyncGenerator[str, Any] = _create_success_generator(
         query=query,
         context=context,

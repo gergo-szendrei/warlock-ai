@@ -31,10 +31,14 @@ def get_query_category(query: str) -> GeneralQAQueryCategory:
 def handle_success(
         query: str,
         chat_history: List[HumanMessage | AIMessage],
+        user_id: str,
         query_category: GeneralQAQueryCategory
 ) -> StreamingResponse:
-    logging.debug(f"Calling handle_success with query: {query} and chat_history: {chat_history}")
-    iterator: AsyncCallbackHandler = AsyncCallbackHandler()
+    logging.debug(f"""
+        Calling handle_success with query: {query}, chat_history: {chat_history},
+        user_id: {user_id} and query_category: {query_category}
+    """)
+    iterator: AsyncCallbackHandler = AsyncCallbackHandler(user_id=user_id)
     success_generator: AsyncGenerator[str, Any] = _create_success_generator(
         query=query,
         chat_history=chat_history,
