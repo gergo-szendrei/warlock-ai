@@ -31,6 +31,10 @@ The application is following a 3 service structure:
 - Therefore, some features may be either missing (for example: chat history) or incomplete (like: validation, authentication, etc.)
 
 ## Setup
+### Prerequisites
+- Create a venv
+- Run pip install -r requirements.txt
+
 ### To develop warlock-backend-service / warlock-frontend-service
 - docker compose -f compose/docker-compose-fs.yml up -d
 
