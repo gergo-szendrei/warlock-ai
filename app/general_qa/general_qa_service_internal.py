@@ -1,4 +1,5 @@
 import asyncio
+import json
 import logging
 from asyncio import Task
 from typing import List, AsyncGenerator, Any
@@ -73,7 +74,7 @@ async def _create_success_generator(
         )
     )
     async for token in iterator.aiter():
-        yield token
+        yield f"data: {json.dumps({'text': token})}\n\n"
     await task
 
     logging.debug(f"Finished _create_success_generator")
