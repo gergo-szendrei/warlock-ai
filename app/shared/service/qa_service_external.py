@@ -1,4 +1,5 @@
 import logging
+import os
 from typing import List
 
 from app.shared.openapi.enum.message_type import MessageType
@@ -9,8 +10,9 @@ def register_impure_thought_appearance(user_id: str) -> None:
     logging.debug(f"Calling register_impure_thought_appearance with user_id: {user_id}")
 
     try:
-        pass
-        # TODO - Implement SYNC API call with External
+        if os.environ["MOCK_BACKEND"] != "True":
+            pass
+            # TODO - Implement SYNC API call with External
     except Exception as e:
         message = f"An error occurred during register_impure_thought_appearance: {e}"
         logging.exception(message)
@@ -23,18 +25,21 @@ def get_conversation_history(user_id: str) -> List[HistoryMessage]:
     logging.debug(f"Calling get_conversation_history with user_id: {user_id}")
 
     try:
-        # TODO - Implement SYNC API call with External
-        history_messages: List[HistoryMessage] = [
-            HistoryMessage.model_validate({
-                "message_content": "Hi! My name is George.",
-                "message_type": MessageType.HUMAN
-            }),
-            HistoryMessage.model_validate({
-                "message_content": "Hi George, it's nice to meet you too! You've mentioned your name earlier. "
-                                   + "How can I assist you today?",
-                "message_type": MessageType.AI
-            })
-        ]
+        if os.environ["MOCK_BACKEND"] != "True":
+            pass
+            # TODO - Implement SYNC API call with External
+        else:
+            history_messages: List[HistoryMessage] = [
+                HistoryMessage.model_validate({
+                    "message_content": "Hi! My name is George.",
+                    "message_type": MessageType.HUMAN
+                }),
+                HistoryMessage.model_validate({
+                    "message_content": "Hi George, it's nice to meet you too! You've mentioned your name earlier. "
+                                       + "How can I assist you today?",
+                    "message_type": MessageType.AI
+                })
+            ]
     except Exception as e:
         message = f"An error occurred during get_conversation_history: {e}"
         logging.exception(message)
@@ -57,8 +62,9 @@ def save_new_message_to_history(
     """)
 
     try:
-        pass
-        # TODO - Implement SYNC API call with External
+        if os.environ["MOCK_BACKEND"] != "True":
+            pass
+            # TODO - Implement SYNC API call with External
     except Exception as e:
         message = f"An error occurred during save_new_message_to_history: {e}"
         logging.exception(message)

@@ -1,4 +1,5 @@
 import logging
+import os
 
 import httpx
 
@@ -13,10 +14,11 @@ async def ingest_document_callback(
         f"Calling ingest_document_callback with document_ingestion_response: {document_ingestion_response} and client")
 
     try:
-        pass
-        # TODO - Add CALLBACK URL with External
-        # callback_url = f"{os.environ["API_PATH_PREFIX"] + os.environ["API_PATH_VERSION"]}document_ingestion/callback"
-        # await client.post(callback_url, json=document_ingestion_response.model_dump())
+        if os.environ["MOCK_BACKEND"] != "True":
+            pass
+            # TODO - Add CALLBACK URL with External
+            # callback_url = f"{os.environ["API_PATH_PREFIX"] + os.environ["API_PATH_VERSION"]}document_ingestion/callback"
+            # await client.post(callback_url, json=document_ingestion_response.model_dump())
     except Exception as e:
         message = f"An error occurred during ingest_document_callback: {e}"
         logging.exception(message)
