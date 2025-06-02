@@ -33,7 +33,7 @@ def get_query_category(query: str) -> GeneralQAQueryCategory:
 def handle_success(
         query: str,
         chat_history: List[HumanMessage | AIMessage],
-        user_id: str,
+        user_id: int,
         query_category: GeneralQAQueryCategory
 ) -> StreamingResponse:
     logging.debug(f"""

@@ -19,7 +19,7 @@ class AsyncCallbackHandler(AsyncIteratorCallbackHandler):
     def __init__(
             self,
             query: str,
-            user_id: str,
+            user_id: int,
             subject_id: int = None,
             topic_id: int = None
     ) -> None:

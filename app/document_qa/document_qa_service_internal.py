@@ -15,7 +15,7 @@ from app.shared.util.async_callback_handler import AsyncCallbackHandler
 
 def get_context(
         query: str,
-        user_id: str,
+        user_id: int,
         subject_id: int,
         topic_id: int
 ) -> str:
@@ -44,7 +44,7 @@ def get_context(
 def handle_success(
         query: str,
         context: str,
-        user_id: str,
+        user_id: int,
         subject_id: int,
         topic_id: int,
         chat_history: List[HumanMessage | AIMessage]

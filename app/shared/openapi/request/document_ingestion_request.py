@@ -4,7 +4,7 @@ from app.shared.openapi.enum.document_type import DocumentType
 
 
 class DocumentIngestionRequest(BaseModel):
-    user_id: str = Field(
+    user_id: int = Field(
         description="""
             Describes the id of a user
             """

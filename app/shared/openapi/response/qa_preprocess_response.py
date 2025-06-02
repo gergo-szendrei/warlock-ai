@@ -6,7 +6,7 @@ from app.shared.openapi.enum.user_role import UserRole
 
 
 class QAPreprocessResponse(BaseModel):
-    user_id: str = Field(
+    user_id: int = Field(
         description="""
         Describes the id of a user
         """

@@ -21,7 +21,7 @@ def preprocess_document_qa_request(
             # TODO - Implement SYNC API call with External
         else:
             qa_preprocess_response: QAPreprocessResponse = QAPreprocessResponse.model_validate({
-                "user_id": "5848988d-255c-48ba-a975-3aa567f1fe3e",
+                "user_id": 111,
                 "user_roles": [UserRole.STUDENT]
             })
     except Exception as e:
