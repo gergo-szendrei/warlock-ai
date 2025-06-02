@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import time
@@ -53,8 +54,13 @@ def handle_error(response: str) -> StreamingResponse:
 def _create_error_generator(response: str) -> Generator[str, Any, None]:
     logging.debug(f"Calling _create_error_generator with response: {response}")
 
-    for token in response.split(" "):
-        yield token + " "
-        time.sleep(float(os.environ["AGENT_COMMON_RESPONSE_TOKEN_DELAY_SECONDS"]))
+    if os.environ["STREAM_TARGET"] == "TERMINAL":
+        for token in response.split(" "):
+            yield token + " "
+            time.sleep(float(os.environ["AGENT_COMMON_RESPONSE_TOKEN_DELAY_SECONDS"]))
+    else:
+        for token in response.split(" "):
+            yield f"data: {json.dumps({'text': token + " "})}\n\n"
+            time.sleep(float(os.environ["AGENT_COMMON_RESPONSE_TOKEN_DELAY_SECONDS"]))
 
     logging.debug(f"Finished _create_error_generator")

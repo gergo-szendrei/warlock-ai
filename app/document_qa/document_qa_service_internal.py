@@ -1,5 +1,7 @@
 import asyncio
+import json
 import logging
+import os
 from asyncio import Task
 from typing import List, AsyncGenerator, Any
 
@@ -89,8 +91,13 @@ async def _create_success_generator(
             iterator=iterator
         )
     )
-    async for token in iterator.aiter():
-        yield token
+
+    if os.environ["STREAM_TARGET"] == "TERMINAL":
+        async for token in iterator.aiter():
+            yield token
+    else:
+        async for token in iterator.aiter():
+            yield f"data: {json.dumps({'text': token})}\n\n"
     await task
 
     logging.debug(f"Finished _create_success_generator")
