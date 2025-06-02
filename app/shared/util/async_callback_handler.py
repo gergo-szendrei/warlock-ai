@@ -18,11 +18,13 @@ class AsyncCallbackHandler(AsyncIteratorCallbackHandler):
 
     def __init__(
             self,
+            query: str,
             user_id: str,
             subject_id: int = None,
             topic_id: int = None
     ) -> None:
         super().__init__()
+        self.query = query
         self.user_id = user_id
         self.subject_id = subject_id
         self.topic_id = topic_id
@@ -87,5 +89,6 @@ class AsyncCallbackHandler(AsyncIteratorCallbackHandler):
                 user_id=self.user_id,
                 subject_id=self.subject_id,
                 topic_id=self.topic_id,
-                message_content=''.join(self.result.get(self.counter))
+                human_message_content=self.query,
+                ai_message_content=''.join(self.result.get(self.counter))
             )

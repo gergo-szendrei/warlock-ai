@@ -48,11 +48,12 @@ def save_new_message_to_history(
         user_id: str,
         subject_id: int,
         topic_id: int,
-        message_content: str
+        human_message_content: str,
+        ai_message_content: str
 ) -> None:
     logging.debug(f"""
-        Calling save_new_message_to_history with user_id: {user_id}, subject_id: {subject_id},
-        topic_id: {topic_id} and message_content: {message_content}
+        Calling save_new_message_to_history with user_id: {user_id}, subject_id: {subject_id}, topic_id: {topic_id}, 
+        human_message_content: {human_message_content} and ai_message_content: {ai_message_content}
     """)
 
     try:

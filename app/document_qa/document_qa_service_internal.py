@@ -54,6 +54,7 @@ def handle_success(
         subject_id: {subject_id}, topic_id: {topic_id} and chat_history: {chat_history}
     """)
     iterator: AsyncCallbackHandler = AsyncCallbackHandler(
+        query=query,
         user_id=user_id,
         subject_id=subject_id,
         topic_id=topic_id

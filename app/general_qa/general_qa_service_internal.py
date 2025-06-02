@@ -40,7 +40,10 @@ def handle_success(
         Calling handle_success with query: {query}, chat_history: {chat_history},
         user_id: {user_id} and query_category: {query_category}
     """)
-    iterator: AsyncCallbackHandler = AsyncCallbackHandler(user_id=user_id)
+    iterator: AsyncCallbackHandler = AsyncCallbackHandler(
+        query=query,
+        user_id=user_id
+    )
     success_generator: AsyncGenerator[str, Any] = _create_success_generator(
         query=query,
         chat_history=chat_history,
