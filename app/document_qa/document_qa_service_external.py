@@ -14,12 +14,16 @@ def preprocess_document_qa_request(
         topic_id: {topic_id} and subject_id: {subject_id}
     """)
 
-    # TODO - Implement SYNC API call with External
-    # TODO - Handle error path
-    qa_preprocess_response: QAPreprocessResponse = QAPreprocessResponse.model_validate({
-        "user_id": "5848988d-255c-48ba-a975-3aa567f1fe3e",
-        "user_roles": [UserRole.STUDENT]
-    })
+    try:
+        # TODO - Implement SYNC API call with External
+        qa_preprocess_response: QAPreprocessResponse = QAPreprocessResponse.model_validate({
+            "user_id": "5848988d-255c-48ba-a975-3aa567f1fe3e",
+            "user_roles": [UserRole.STUDENT]
+        })
+    except Exception as e:
+        message = f"An error occurred during preprocess_document_qa_request: {e}"
+        logging.exception(message)
+        raise e
 
     logging.debug(
         f"Finished preprocess_document_qa_request with qa_preprocess_response: {qa_preprocess_response}")

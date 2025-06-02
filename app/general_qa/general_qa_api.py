@@ -22,32 +22,37 @@ router = APIRouter()
     response_model=None
 )
 async def general_qa(general_qa_request: GeneralQARequest) -> StreamingResponse | str:
-    logging.debug(f"Calling general_qa with general_qa_request: {general_qa_request}")
+    try:
+        logging.debug(f"Calling general_qa with general_qa_request: {general_qa_request}")
 
-    # Preprocess via External Service
-    qa_preprocess_response: QAPreprocessResponse = preprocess_general_qa_request(
-        warlock_api_key=general_qa_request.warlock_api_key
-    )
+        # Preprocess via External Service
+        qa_preprocess_response: QAPreprocessResponse = preprocess_general_qa_request(
+            warlock_api_key=general_qa_request.warlock_api_key
+        )
 
-    # Run shared QA logic
-    shared_qa_result: str | List[HumanMessage | AIMessage] = await qa(
-        qa_preprocess_response=qa_preprocess_response,
-        query=general_qa_request.query
-    )
+        # Run shared QA logic
+        shared_qa_result: str | List[HumanMessage | AIMessage] = await qa(
+            qa_preprocess_response=qa_preprocess_response,
+            query=general_qa_request.query
+        )
 
-    # Impure thoughts path
-    if type(shared_qa_result) is str:
-        # Respond error via Internal Service
-        return handle_error(shared_qa_result)
+        # Impure thoughts path
+        if type(shared_qa_result) is str:
+            # Respond error via Internal Service
+            return handle_error(shared_qa_result)
 
-    # Identify query category via Internal Service
-    query_category: GeneralQAQueryCategory = get_query_category(query=general_qa_request.query)
+        # Identify query category via Internal Service
+        query_category: GeneralQAQueryCategory = get_query_category(query=general_qa_request.query)
 
-    logging.debug(f"Finished general_qa, starting stream")
-    # Respond success via Internal Service
-    return handle_success(
-        query=general_qa_request.query,
-        chat_history=shared_qa_result,
-        user_id=qa_preprocess_response.user_id,
-        query_category=query_category
-    )
+        logging.debug(f"Finished general_qa, starting stream")
+        # Respond success via Internal Service
+        return handle_success(
+            query=general_qa_request.query,
+            chat_history=shared_qa_result,
+            user_id=qa_preprocess_response.user_id,
+            query_category=query_category
+        )
+    except Exception as e:
+        message = f"An error occurred during general_qa: {e}"
+        logging.exception(message)
+        return handle_error(message)
