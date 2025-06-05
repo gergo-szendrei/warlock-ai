@@ -6,7 +6,7 @@ import requests
 
 from app.shared.openapi.enum.message_type import MessageType
 from app.shared.openapi.history_message import HistoryMessage
-from app.shared.util.external_service_util import backend_common_headers, backend_url_static_part,
+from app.shared.util.external_service_util import backend_common_headers, backend_url_static_part
 
 
 def register_impure_thought_appearance(user_id: int) -> None:
@@ -71,8 +71,17 @@ def save_new_message_to_history(
 
     try:
         if os.environ["MOCK_BACKEND"] != "True":
-            pass
-            # TODO - Implement SYNC API call with External
+            requests.post(
+                url=backend_url_static_part + "save-qa",
+                headers=backend_common_headers,
+                json={
+                    "user_id": user_id,
+                    "subject_id": subject_id,
+                    "topic_id": topic_id,
+                    "human_message_content": human_message_content,
+                    "ai_message_content": ai_message_content
+                }
+            )
     except Exception as e:
         message = f"An error occurred during save_new_message_to_history: {e}"
         logging.exception(message)
