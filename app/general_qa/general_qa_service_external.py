@@ -18,7 +18,7 @@ def preprocess_general_qa_request(warlock_api_key: str) -> QAPreprocessResponse:
                 url=backend_url_static_part + "validate-user",
                 headers=backend_common_headers,
                 json={
-                    "token": warlock_api_key
+                    "warlock_api_key": warlock_api_key
                 }
             )
             qa_preprocess_response: QAPreprocessResponse = QAPreprocessResponse.model_validate({
