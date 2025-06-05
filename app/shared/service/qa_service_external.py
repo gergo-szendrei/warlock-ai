@@ -2,8 +2,11 @@ import logging
 import os
 from typing import List
 
+import requests
+
 from app.shared.openapi.enum.message_type import MessageType
 from app.shared.openapi.history_message import HistoryMessage
+from app.shared.util.external_service_util import backend_common_headers, backend_url_static_part,
 
 
 def register_impure_thought_appearance(user_id: int) -> None:
@@ -11,8 +14,13 @@ def register_impure_thought_appearance(user_id: int) -> None:
 
     try:
         if os.environ["MOCK_BACKEND"] != "True":
-            pass
-            # TODO - Implement SYNC API call with External
+            requests.put(
+                url=backend_url_static_part + "add-strike-to-user",
+                headers=backend_common_headers,
+                json={
+                    "user_id": user_id
+                }
+            )
     except Exception as e:
         message = f"An error occurred during register_impure_thought_appearance: {e}"
         logging.exception(message)
