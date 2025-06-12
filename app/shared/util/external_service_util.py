@@ -10,6 +10,6 @@ backend_common_headers = {
 }
 
 
-def parse_response_content(content: [bytes]) -> dict:
+def parse_response_content(content: [bytes]) -> dict | list:
     body_str = content.decode("utf-8")
     return json.loads(body_str)

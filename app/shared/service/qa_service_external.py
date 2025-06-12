@@ -6,7 +6,8 @@ import requests
 
 from app.shared.openapi.enum.message_type import MessageType
 from app.shared.openapi.history_message import HistoryMessage
-from app.shared.util.external_service_util import backend_common_headers, backend_url_static_part
+from app.shared.util.external_service_util import backend_common_headers, backend_url_static_part, \
+    parse_response_content
 
 
 def register_impure_thought_appearance(user_id: int) -> None:
@@ -34,8 +35,16 @@ def get_conversation_history(user_id: int) -> List[HistoryMessage]:
 
     try:
         if os.environ["MOCK_BACKEND"] != "True":
-            pass
-            # TODO - Implement SYNC API call with External
+            response = requests.get(
+                url=backend_url_static_part + "get-conversation-history",
+                headers=backend_common_headers,
+                params={
+                    "user_id": user_id
+                }
+            )
+            history_messages: List[HistoryMessage] = [
+                HistoryMessage.model_validate(el) for el in parse_response_content(response.content)
+            ]
         else:
             history_messages: List[HistoryMessage] = [
                 HistoryMessage.model_validate({
