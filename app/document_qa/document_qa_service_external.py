@@ -1,8 +1,12 @@
 import logging
 import os
 
+import requests
+
 from app.shared.openapi.enum.user_role import UserRole
 from app.shared.openapi.response.qa_preprocess_response import QAPreprocessResponse
+from app.shared.util.external_service_util import backend_url_static_part, backend_common_headers, \
+    parse_response_content
 
 
 def preprocess_document_qa_request(
@@ -17,8 +21,18 @@ def preprocess_document_qa_request(
 
     try:
         if os.environ["MOCK_BACKEND"] != "True":
-            pass
-            # TODO - Implement SYNC API call with External
+            response = requests.post(
+                url=backend_url_static_part + "validate-user-document-qa",
+                headers=backend_common_headers,
+                json={
+                    "warlock_api_key": warlock_api_key,
+                    "topic_id": topic_id,
+                    "subject_id": subject_id
+                }
+            )
+            qa_preprocess_response: QAPreprocessResponse = QAPreprocessResponse.model_validate({
+                **parse_response_content(response.content)
+            })
         else:
             qa_preprocess_response: QAPreprocessResponse = QAPreprocessResponse.model_validate({
                 "user_id": 111,
