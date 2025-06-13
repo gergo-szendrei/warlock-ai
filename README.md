@@ -56,9 +56,9 @@ The application is following a 3 service structure:
 
 2. Document Ingestion
    1. PDF
-      - curl -X POST http://127.0.0.1:8123/api/python/v1/document-ingestion -H "accept: application/json" -H "Content-Type: application/json" -d '{"user_id": 111, "subject_id": 1, "topic_id": 11, "document_path": "/Users/mac.username/Documents/document_ingestion_test.pdf", "document_id": 101, "document_type": 1}' &
+      - curl -X POST http://127.0.0.1:8123/api/python/v1/document-ingestion -H "accept: application/json" -H "Content-Type: application/json" -d '{"user_id": 111, "subject_id": 1, "topic_id": 11, "document_path": "/Users/mac.username/Documents/document_ingestion_test.pdf", "document_id": 101, "document_type": "PDF"}' &
    2. HTML
-      - curl -X POST http://127.0.0.1:8123/api/python/v1/document-ingestion -H "accept: application/json" -H "Content-Type: application/json" -d '{"user_id": 111, "subject_id": 1, "topic_id": 11, "document_path": "http://car-database-bucket.s3-website-eu-west-1.amazonaws.com", "document_id": 102, "document_type": 2}' &
+      - curl -X POST http://127.0.0.1:8123/api/python/v1/document-ingestion -H "accept: application/json" -H "Content-Type: application/json" -d '{"user_id": 111, "subject_id": 1, "topic_id": 11, "document_path": "http://car-database-bucket.s3-website-eu-west-1.amazonaws.com", "document_id": 102, "document_type": "HTML"}' &
 
 3. Document QA
    1. Use ingested document to get answer
