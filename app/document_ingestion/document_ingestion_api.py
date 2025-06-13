@@ -11,7 +11,7 @@ router = APIRouter()
 
 
 @router.post(
-    os.environ["API_PATH_PREFIX"] + os.environ["API_PATH_VERSION"] + "document_ingestion"
+    os.environ["API_PATH_PREFIX"] + os.environ["API_PATH_VERSION"] + "document-ingestion"
 )
 async def document_ingestion(document_ingestion_request: DocumentIngestionRequest) -> None:
     logging.debug(f"Calling document_ingestion with document_ingestion_request: {document_ingestion_request}")

@@ -17,7 +17,7 @@ router = APIRouter()
 
 
 @router.post(
-    os.environ["API_PATH_PREFIX"] + os.environ["API_PATH_VERSION"] + "document_qa",
+    os.environ["API_PATH_PREFIX"] + os.environ["API_PATH_VERSION"] + "document-qa",
     response_model=None
 )
 async def document_qa(document_qa_request: DocumentQARequest) -> StreamingResponse | str:

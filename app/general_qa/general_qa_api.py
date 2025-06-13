@@ -18,7 +18,7 @@ router = APIRouter()
 
 
 @router.post(
-    os.environ["API_PATH_PREFIX"] + os.environ["API_PATH_VERSION"] + "general_qa",
+    os.environ["API_PATH_PREFIX"] + os.environ["API_PATH_VERSION"] + "general-qa",
     response_model=None
 )
 async def general_qa(general_qa_request: GeneralQARequest) -> StreamingResponse | str:
