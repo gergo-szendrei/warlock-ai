@@ -8,7 +8,8 @@ langchain-experimental==0.3.4
 # AI - Agent
 numpy~=1.26.4
 stackapi~=0.3.1
-duckduckgo-search~=7.5.1
+# TODO - Switch back if Rate Limit issue has been solved
+# duckduckgo-search~=7.5.1
 
 # AI - Document
 langchain_postgres==0.0.13
