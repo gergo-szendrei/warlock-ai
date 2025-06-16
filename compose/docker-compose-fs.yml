@@ -14,6 +14,8 @@ services:
     depends_on:
       - "warlock-llm-service"
       - "warlock-db-service"
+    volumes:
+      - shared-filestore:/app/filestore
   warlock-llm-service:
     image: "ollama/ollama:latest"
     container_name: "warlock-llm-container"
@@ -45,6 +47,9 @@ services:
 volumes:
   warlock-llm-volume:
   warlock-db-volume:
+  shared-filestore:
+    name: shared-filestore
+    driver: local
 
 networks:
   warlock-network:
